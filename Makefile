@@ -1,15 +1,13 @@
 CC = gcc
 CFLAGS = -Wall
 
-OBJ = main.o 
+all: server client 
 
-all: main.exe
+server: server.c
+	$(CC) $(CFLAGS) server.c -o server
 
-main.exe: $(OBJ)
-	$(CC) $(OBJ) -o main.exe
-
-main.o: main.c
-	$(CC) $(CFLAGS) -c main.c
+client: client.c
+	$(CC) $(CFLAGS) client.c -o client
 
 clean:
-	rm -f *.o main.exe
+	rm -f server client

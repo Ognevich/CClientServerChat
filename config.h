@@ -1,2 +1,4 @@
 #define BUFF_SIZE 1024
+#define MESSAGE_SIZE 256
+
 #define PORT 8080
