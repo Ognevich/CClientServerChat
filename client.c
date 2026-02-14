@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include "config.h"
+#include "util.h"
 
 int main (int argc, char * argv[])
 {
@@ -29,10 +30,11 @@ int main (int argc, char * argv[])
         return 1;
     }
 
-    const char * message = "Hello from client\n";
-    const int msg_size = sizeof(message);
+    char send_buffer[MESSAGE_SIZE];
+    input_server_msg(send_buffer,MESSAGE_SIZE);
 
-    if (send(sock_fd,message,msg_size, 0) < 0)
+
+    if (send(sock_fd,send_buffer,sizeof(send_buffer), 0) < 0)
     {
         printf("Send failed\n");
         return 1;

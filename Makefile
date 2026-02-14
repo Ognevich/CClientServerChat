@@ -1,13 +1,17 @@
-CC = gcc
-CFLAGS = -Wall
 
-all: server client 
+all: server client
 
-server: server.c
-	$(CC) $(CFLAGS) server.c -o server
+server: $(OBJ_DIR)/server.o $(COMMON_OBJ)
+        $(CC) $(CFLAGS) $^ -o $@
 
-client: client.c
-	$(CC) $(CFLAGS) client.c -o client
+client: $(OBJ_DIR)/client.o $(COMMON_OBJ)
+        $(CC) $(CFLAGS) $^ -o $@
+
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+        $(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+        mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -f server client
+        rm -rf $(OBJ_DIR) server client
